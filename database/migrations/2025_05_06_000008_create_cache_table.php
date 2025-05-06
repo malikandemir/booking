@@ -8,11 +8,15 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::rename('car_bookings', 'bookings');
+        Schema::create('cache', function (Blueprint $table) {
+            $table->string('key', 255)->primary();
+            $table->mediumText('value');
+            $table->integer('expiration');
+        });
     }
 
     public function down()
     {
-        Schema::rename('bookings', 'car_bookings');
+        Schema::dropIfExists('cache');
     }
 };
