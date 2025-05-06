@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: carapp-php
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - carapp-network
+
+  # Nginx Service
+  nginx:
+    image: nginx:alpine
+    container_name: carapp-nginx
+    restart: unless-stopped
+    ports:
+      - "8013:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d/
+    networks:
+      - carapp-network
+
+  # MySQL Service
+  db:
+    image: mysql:8.0
+    container_name: carapp-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: carappointment
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_USER: carapp_user
+      MYSQL_PASSWORD: carapp_password
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3313:3306"
+    networks:
+      - carapp-network
+
+networks:
+  carapp-network:
+    driver: bridge
+
+volumes:
+  dbdata:

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="757bdb5b-a096-49e9-b7a9-a13be8d237e8" name="Booking" url="http://ftp.mehmetalikandemir.com.tr">
+        <fileTransfer host="ftp.mehmetalikandemir.com.tr" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
