@@ -20,10 +20,12 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             CompanySeeder::class,
             ItemSeeder::class,
+            UserSeeder::class,
         ]);
 
         // Get the first company
         $company = \App\Models\Company::first();
+        $this->call(BookingSeeder::class);
         if (!$company) {
             throw new \Exception('Please run CompanySeeder first!');
         }

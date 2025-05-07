@@ -26,6 +26,12 @@ Route::middleware(['web'])->group(function () {
 
     // Welcome page for unlogged users
     Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+
+    // Privacy Policy page
+    Route::view('/privacy-policy', 'privacy-policy')->name('privacy.policy');
+
+    // Terms of Service page
+    Route::view('/terms-of-service', 'terms-of-service')->name('terms.service');
 });
 
 Route::middleware(['auth'])->group(function () {

@@ -6,23 +6,27 @@
   <component name="ChangeListManager">
     <list default="true" id="11d0cc4f-98de-4712-a9db-5adc54908c08" name="Changes" comment="first commit">
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/0001_01_01_000000_create_users_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/0001_01_01_000001_create_cache_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/0001_01_01_000002_create_jobs_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2024_01_01_150605_create_roles_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2024_01_01_152209_add_description_to_bookings_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2024_01_28_000002_add_is_admin_to_users_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2024_12_28_183735_create_car_bookings_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2024_12_29_000000_rename_car_bookings_to_bookings.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2024_12_29_000001_create_companies_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2024_12_29_000002_create_items_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2024_12_29_000003_add_company_id_to_users_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2024_12_29_000004_update_bookings_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2024_12_30_112648_add_icon_to_items_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2025_01_01_154755_create_user_item_roles_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/cache/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2025_05_06_000001_create_bookings_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2025_05_06_000002_create_companies_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2025_05_06_000004_create_users_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2025_05_06_000007_create_resource_user_roles_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2025_05_06_000015_create_personal_access_tokens_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/app/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/private/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/app/private/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/app/public/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/sessions/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/testing/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/testing/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/views/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/views/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/logs/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +213,7 @@
       <workItem from="1746525951105" duration="3354000" />
       <workItem from="1746538538540" duration="1554000" />
       <workItem from="1746540144480" duration="1337000" />
-      <workItem from="1746541501287" duration="112000" />
+      <workItem from="1746541501287" duration="5968000" />
     </task>
     <servers />
   </component>

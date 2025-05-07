@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('company_id');
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->timestamp('approved_at')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->foreign('approved_by')->references('id')->on('users')->onDelete('set null');
         });

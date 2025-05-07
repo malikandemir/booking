@@ -66,3 +66,18 @@ Default login credentials:
 ## License
 
 MIT License
+
+## Tables
+- companies
+- users
+- roles
+- user_item_roles (keep the item roles approver or booker )
+- items
+- bookings
+
+## some roles
+- manage companies
+- manage all users
+- manage company users (user can manage his company users only)
+- approve
+- book

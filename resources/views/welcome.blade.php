@@ -170,8 +170,8 @@
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <div class="d-flex justify-content-center justify-content-md-end gap-3">
-                        <a href="#" class="text-muted text-decoration-none">{{ __('Privacy Policy') }}</a>
-                        <a href="#" class="text-muted text-decoration-none">{{ __('Terms of Service') }}</a>
+                        <a href="{{ route('privacy.policy') }}" class="text-muted text-decoration-none">{{ __('Privacy Policy') }}</a>
+                        <a href="{{ route('terms.service') }}" class="text-muted text-decoration-none">{{ __('Terms of Service') }}</a>
                     </div>
                 </div>
             </div>
