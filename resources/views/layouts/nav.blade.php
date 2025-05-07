@@ -50,7 +50,7 @@
                     </a>
                 </li>
 
-                @if(auth()->user()->isSuperAdmin())
+                @if(auth()->user()->hasPermission('manage_companies'))
                     <li class="nav-item mb-2">
                         <a class="nav-link {{ request()->routeIs('companies.*') ? 'active' : '' }}" href="{{ route('companies.index') }}">
                             <i class="fas fa-building me-2"></i>{{ __('Companies') }}
@@ -58,12 +58,14 @@
                     </li>
                 @endif
 
-                @if(auth()->user()->isAdmin())
+                @if(auth()->user()->hasPermission('manage_items'))
                     <li class="nav-item mb-2">
                         <a class="nav-link {{ request()->routeIs('items.*') ? 'active' : '' }}" href="{{ route('items.index') }}">
                             <i class="fas fa-car me-2"></i>{{ __('Items') }}
                         </a>
                     </li>
+                @endif
+                @if(auth()->user()->hasPermission('manage_company_users'))
                     <li class="nav-item mb-2">
                         <a class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}" href="{{ route('users.index') }}">
                             <i class="fas fa-users me-2"></i>{{ __('Users') }}

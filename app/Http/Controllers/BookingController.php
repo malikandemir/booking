@@ -17,11 +17,8 @@ class BookingController extends Controller
         $user = Auth::user();
         $query = Booking::with(['user', 'item']);
 
-        // Get items where user has approval role
-        $approverRole = Role::where('name', 'Booking Approver')->first();
         $itemsWithApprovalAccess = DB::table('user_item_roles')
             ->where('user_id', $user->id)
-            ->where('role_id', $approverRole->id)
             ->pluck('item_id');
 
         $query->where(function($q) use ($user, $itemsWithApprovalAccess) {
@@ -43,7 +40,6 @@ class BookingController extends Controller
             ];
         });
 
-        // Get items where user has approval role for the dropdown
         $items = Item::where('company_id', $user->company_id)
             ->where('status', true)
             ->whereIn('id', $itemsWithApprovalAccess)
@@ -99,10 +95,6 @@ class BookingController extends Controller
         ]);
 
         $item = Item::findOrFail($validated['item_id']);
-        
-        if (!auth()->user()->canBook($item)) {
-            return redirect()->back()->with('error', __('You do not have permission to book this resource'));
-        }
 
         // Check for overlapping bookings
         $hasOverlap = Booking::where('item_id', $validated['item_id'])
@@ -124,6 +116,7 @@ class BookingController extends Controller
         $validated['description'] = $validated['description'] ?? null;
 
         $booking = Booking::create([
+            'company_id' => auth()->user()->company_id,
             'user_id' => auth()->id(),
             'item_id' => $validated['item_id'],
             'start_time' => $validated['start_time'],

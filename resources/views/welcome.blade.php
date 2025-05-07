@@ -89,16 +89,6 @@
                     @endif
                     <h1 class="display-4 fw-bold mb-4">{{ __('Efficient Resource Booking System') }}</h1>
                     <p class="lead mb-4">{{ __('Streamline your resource management with our intuitive booking platform. Perfect for companies of all sizes.') }}</p>
-                    @guest
-                        <div class="d-flex gap-3">
-                            <a href="{{ route('login') }}" class="btn btn-light btn-lg px-4">
-                                {{ __('Get Started') }}
-                            </a>
-                            <a href="{{ route('register') }}" class="btn btn-outline-light btn-lg px-4">
-                                {{ __('Sign Up') }}
-                            </a>
-                        </div>
-                    @endguest
                 </div>
             </div>
         </div>

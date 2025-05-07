@@ -10,17 +10,11 @@ class ItemController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Item::class, 'item');
     }
 
     public function index()
     {
-        $items = Item::query()
-            ->when(auth()->user()->isAdmin(), function ($query) {
-                $query->where('company_id', auth()->user()->company_id);
-            })
-            ->with('company')
-            ->paginate(10);
+        $items = Item::paginate(10);
 
         return view('items.index', compact('items'));
     }

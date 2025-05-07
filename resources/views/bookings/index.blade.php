@@ -16,15 +16,17 @@
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="d-flex flex-wrap gap-2 justify-content-start justify-content-md-end">
-                                @if(auth()->user()->isSuperAdmin())
+                                @if(auth()->user()->hasPermission('manage_companies'))
                                     <a href="{{ route('companies.index') }}" class="btn btn-outline-primary btn-sm">
                                         <i class="fas fa-building me-1"></i>{{ __('Companies') }}
                                     </a>
                                 @endif
-                                @if(auth()->user()->isAdmin())
+                                @if(auth()->user()->hasPermission('manage_items'))
                                     <a href="{{ route('items.index') }}" class="btn btn-outline-primary btn-sm">
                                         <i class="fas fa-box me-1"></i>{{ __('Items') }}
                                     </a>
+                                @endif
+                                @if(auth()->user()->hasPermission('manage_all_users'))
                                     <a href="{{ route('users.index') }}" class="btn btn-outline-primary btn-sm">
                                         <i class="fas fa-users me-1"></i>{{ __('Users') }}
                                     </a>
@@ -99,7 +101,6 @@
                                                             </li>
                                                         @endif
                                                         @if($booking->status === 'pending')
-                                                            @if(auth()->user()->canApprove($booking->item))
                                                                 <li>
                                                                     <form action="{{ route('bookings.approve', $booking) }}" method="POST" class="d-inline">
                                                                         @csrf
@@ -118,7 +119,6 @@
                                                                         </button>
                                                                     </form>
                                                                 </li>
-                                                            @endif
                                                         @endif
                                                     </ul>
                                                 </div>

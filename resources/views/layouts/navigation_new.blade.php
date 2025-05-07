@@ -55,7 +55,7 @@
                 </a>
             </li>
 
-            @if(auth()->user()->isSuperAdmin())
+            @if(auth()->user()->hasPermission('manage_companies'))
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('companies.*') ? 'active' : '' }}" href="{{ route('companies.index') }}">
                         <i class="fas fa-building me-2"></i>{{ __('Companies') }}

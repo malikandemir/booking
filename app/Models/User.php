@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\DB;
+use App\Models\Permission;
 
 class User extends Authenticatable
 {
@@ -49,6 +50,15 @@ class User extends Authenticatable
         return $this->belongsTo(Company::class);
     }
 
+    /**
+     * The roles that belong to the user.
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'users_roles')
+            ->withTimestamps();
+    }
+
     public function isSuperAdmin()
     {
         return $this->is_admin === self::ROLE_SUPER_ADMIN;
@@ -69,44 +79,17 @@ class User extends Authenticatable
         return $query->where('company_id', $companyId);
     }
 
-    public function roles(): BelongsToMany
-    {
-        return $this->belongsToMany(Role::class, 'resource_user_roles')
-            ->withPivot('item_id')
-            ->withTimestamps();
-    }
-
     /**
-     * Get the roles for items that this user can manage
+     * Check if user has a given permission (direct or via roles)
      */
-    public function itemRoles()
+    public function hasPermission($permission): bool
     {
-        return $this->belongsToMany(Role::class, 'user_item_roles')
-            ->withPivot('item_id')
-            ->withTimestamps();
+        return $this->roles()->whereHas('permissions', function ($query) use ($permission) {
+            $query->where('slug', $permission);
+        })->exists();
     }
 
-    public function canBook(Item $item): bool
-    {
-        return $this->itemRoles()
-            ->wherePivot('item_id', $item->id)
-            ->wherePivot('role_id', Role::where('slug', 'booker')->first()->id)
-            ->exists();
-    }
 
-    public function canApprove(Item $item)
-    {
-        $approverRole = Role::where('name', 'Booking Approver')->first();
-        if (!$approverRole) {
-            return false;
-        }
-
-        return DB::table('user_item_roles')
-            ->where('user_id', $this->id)
-            ->where('item_id', $item->id)
-            ->where('role_id', $approverRole->id)
-            ->exists();
-    }
 
     public function canApproveBooking(Booking $booking)
     {
@@ -127,7 +110,7 @@ class User extends Authenticatable
             return $query->get();
         }
 
-        $approverRole = Role::where('name', 'Booking Approver')->first();
+        $approverRole = Role::where('name', 'Approve')->first();
         if (!$approverRole) {
             return collect();
         }

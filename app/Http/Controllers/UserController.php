@@ -12,19 +12,14 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin');
+
     }
 
     public function index()
     {
-        $query = User::query();
-        
-        // If admin (not super admin), only show users from their company
-        if (!Auth::user()->isSuperAdmin()) {
-            $query->where('company_id', Auth::user()->company_id);
-        }
-        
-        $users = $query->get();
+        $users = User::where('company_id', Auth::user()->company_id)
+            ->get();
+
         return view('users.index', compact('users'));
     }
 

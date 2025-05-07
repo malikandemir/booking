@@ -43,20 +43,12 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/bookings/{booking}/reject', [BookingController::class, 'reject'])->name('bookings.reject');
     Route::get('/bookings/item/{item}/bookings', [BookingController::class, 'getItemBookings'])->name('bookings.item.bookings');
 
-    // Items (Admin only)
-    Route::middleware(['admin'])->group(function () {
-        Route::resource('items', ItemController::class);
-        Route::get('/items/{item}/roles', [ResourceRoleController::class, 'index'])->name('items.roles');
-        Route::put('/items/{item}/roles', [ResourceRoleController::class, 'update'])->name('items.roles.update');
-    });
+    Route::resource('items', ItemController::class);
+    Route::get('/items/{item}/roles', [ResourceRoleController::class, 'index'])->name('items.roles');
+    Route::put('/items/{item}/roles', [ResourceRoleController::class, 'update'])->name('items.roles.update');
 
-    // Companies (Super Admin only)
-    Route::middleware(['super.admin'])->group(function () {
-        Route::resource('companies', CompanyController::class);
-    });
+    Route::resource('companies', CompanyController::class);
 
-    // Users
-    Route::middleware(['admin'])->group(function () {
-        Route::resource('users', UserController::class);
-    });
+    Route::resource('users', UserController::class);
+
 });
