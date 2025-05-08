@@ -30,9 +30,43 @@ Services:
   - Password: carapp_password
   - Root Password: root_password
 
-Default login credentials:
-- Admin: admin@example.com / password
-- User: user@example.com / password
+Default login credentials (seeded by default):
+- Super Admin: sadmin@booking.com / password (Company 2)
+- Admin: admin@booking.com / password (Company 1)
+- User: user@booking.com / password (Company 1)
+
+- All passwords are set to `password` by default.
+- Super Admin belongs to Company 2; Admin and User belong to Company 1.
+
+## Roles & Permissions
+
+**Super Admin**
+- Manage all companies
+- Manage all users
+- Manage company users
+- Manage roles
+
+**Admin**
+- Manage company users (within their own company)
+- Manage resources
+- Approve booking requests
+- Book resources
+- Manage bookings
+
+**User**
+- Approve booking requests (if assigned as approver)
+- Book resources
+- Manage their own bookings
+
+### Permissions Reference
+- **Manage Companies**: Create, update, and delete companies
+- **Manage All Users**: Manage all users in the system
+- **Manage Company Users**: Manage users within the same company
+- **Manage Resources**: Create, update, and delete resources
+- **Approve**: Approve or reject booking requests
+- **Book**: Request bookings for resources
+- **Manage Roles**: Assign and manage user roles
+- **Manage Bookings**: View and manage booking records
 
 ## Manual Setup
 
