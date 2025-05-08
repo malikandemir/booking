@@ -16,13 +16,13 @@
                             <label for="item_id" class="form-label">{{ __('Resource') }}</label>
                             <select name="item_id" id="item_id" class="form-select @error('item_id') is-invalid @enderror" required>
                                 <option value="">{{ __('Select a resource') }}</option>
-                                @foreach($items as $item)
-                                        <option value="{{ $item->id }}" @selected(old('item_id') == $item->id)>
-                                            {{ $item->name }}
+                                @foreach($resources as $resource)
+                                        <option value="{{ $resource->id }}" @selected(old('resource_id') == $resource->id)>
+                                            {{ $resource->name }}
                                         </option>
                                 @endforeach
                             </select>
-                            @error('item_id')
+                            @error('resource_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -86,32 +86,32 @@
 document.addEventListener('DOMContentLoaded', function() {
     var startTimeInput = document.getElementById('start_time');
     var endTimeInput = document.getElementById('end_time');
-    var itemSelect = document.getElementById('item_id');
+    var resourceSelect = document.getElementById('resource_id');
     var bookingsList = document.getElementById('bookings-list');
 
-    function loadBookings(itemId) {
-        if (!itemId) {
+    function loadBookings(resourceId) {
+        if (!resourceId) {
             bookingsList.style.display = 'none';
             return;
         }
 
-        fetch(`/bookings/item/${itemId}/bookings`)
+        fetch(`/bookings/resource/${resourceId}/bookings`)
             .then(response => response.json())
             .then(bookings => {
                 const listGroup = bookingsList.querySelector('.list-group');
                 listGroup.innerHTML = '';
 
                 if (bookings.length === 0) {
-                    listGroup.innerHTML = '<div class="list-group-item text-muted">No bookings found</div>';
+                    listGroup.innerHTML = '<div class="list-group-resource text-muted">No bookings found</div>';
                 } else {
                     bookings.forEach(booking => {
                         const statusClass = booking.status === 'approved' ? 'text-success' : 
                                         (booking.status === 'rejected' ? 'text-danger' : 'text-warning');
                         
-                        const item = document.createElement('div');
-                        item.className = 'list-group-item';
-                        item.innerHTML = `
-                            <div class="d-flex justify-content-between align-items-center">
+                        const resource = document.createElement('div');
+                        resource.className = 'list-group-resource';
+                        resource.innerHTML = `
+                            <div class="d-flex justify-content-between align-resources-center">
                                 <div>
                                     <h6 class="mb-1">${booking.user}</h6>
                                     <p class="mb-1 text-muted small">${booking.purpose}</p>
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </div>
                             </div>
                         `;
-                        listGroup.appendChild(item);
+                        listGroup.appendChild(resource);
                     });
                 }
                 bookingsList.style.display = 'block';
@@ -135,13 +135,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    itemSelect.addEventListener('change', function() {
+    resourceSelect.addEventListener('change', function() {
         loadBookings(this.value);
     });
 
     // Load bookings for initial selection
-    if (itemSelect.value) {
-        loadBookings(itemSelect.value);
+    if (resourceSelect.value) {
+        loadBookings(resourceSelect.value);
     }
 
     startTimeInput.addEventListener('change', function() {
