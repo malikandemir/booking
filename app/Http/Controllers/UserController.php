@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Role;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,37 +19,31 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::where('company_id', Auth::user()->company_id)
-            ->get();
+        $users = User::get();
 
         return view('users.index', compact('users'));
     }
 
     public function create()
     {
-        $companies = $this->getAvailableCompanies();
-        return view('users.create', compact('companies'));
+        $companies = Company::all();
+        $roles = Role::all();
+        return view('users.create', compact('companies', 'roles'));
     }
 
     public function store(Request $request)
     {
         $this->validateUser($request);
 
-        $userData = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'is_admin' => $this->determineUserRole($request),
-        ];
-
-        // Set company_id based on role and current user
-        if (!Auth::user()->isSuperAdmin()) {
-            $userData['company_id'] = Auth::user()->company_id;
-        } else {
-            $userData['company_id'] = $request->company_id;
-        }
-
-        User::create($userData);
+        User::create(
+            [
+                'name' => $request->name,
+                'email' => $request->email,
+                'company_id' => $request->company_id,
+                'password' => Hash::make($request->password),
+                'is_admin' => $this->determineUserRole($request),
+            ]
+        );
 
         return redirect()->route('users.index')
             ->with('success', __('User created successfully.'));
@@ -55,28 +51,18 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        // Check if user has permission to edit this user
-        if (!Auth::user()->isSuperAdmin() && $user->company_id !== Auth::user()->company_id) {
-            abort(403);
-        }
-
-        $companies = $this->getAvailableCompanies();
-        return view('users.edit', compact('user', 'companies'));
+        $companies = Company::all();
+        $roles = Role::get();
+        return view('users.edit', compact('user', 'companies','roles'));
     }
 
     public function update(Request $request, User $user)
     {
-        // Check if user has permission to update this user
-        if (!Auth::user()->isSuperAdmin() && $user->company_id !== Auth::user()->company_id) {
-            abort(403);
-        }
-
         $this->validateUser($request, $user->id);
 
         $userData = [
             'name' => $request->name,
-            'email' => $request->email,
-            'is_admin' => $this->determineUserRole($request),
+            'email' => $request->email
         ];
 
         if ($request->filled('password')) {
@@ -90,7 +76,16 @@ class UserController extends Controller
             $userData['company_id'] = $request->company_id;
         }
 
+        // Validate roles input
+        $validated = $request->validate([
+            'roles' => 'required|array',
+            'roles.*' => 'exists:roles,id',
+        ]);
+
         $user->update($userData);
+
+        // Sync roles
+        $user->roles()->sync($request->input('roles', []));
 
         return redirect()->route('users.index')
             ->with('success', __('User updated successfully.'));
@@ -122,13 +117,5 @@ class UserController extends Controller
             return User::ROLE_ADMIN;
         }
         return User::ROLE_USER;
-    }
-
-    protected function getAvailableCompanies()
-    {
-        if (Auth::user()->isSuperAdmin()) {
-            return Company::all();
-        }
-        return Company::where('id', Auth::user()->company_id)->get();
     }
 }

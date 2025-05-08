@@ -13,7 +13,7 @@ class BookingsTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'company_id' => 1,
-                'item_id' => 1,
+                'resource_id' => 1,
                 'start_time' => now()->addDay(),
                 'end_time' => now()->addDays(2),
                 'status' => 'pending',
@@ -26,7 +26,7 @@ class BookingsTableSeeder extends Seeder
             [
                 'user_id' => 2,
                 'company_id' => 1,
-                'item_id' => 1,
+                'resource_id' => 1,
                 'start_time' => now()->addDays(3),
                 'end_time' => now()->addDays(4),
                 'status' => 'approved',

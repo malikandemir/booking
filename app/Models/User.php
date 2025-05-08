@@ -98,7 +98,7 @@ class User extends Authenticatable
             return false;
         }
 
-        return $this->canApprove($booking->item);
+        return $this->canApprove($booking->resource);
     }
 
     public function getPendingBookingsToApprove()
@@ -115,12 +115,12 @@ class User extends Authenticatable
             return collect();
         }
 
-        $itemIds = DB::table('user_item_roles')
+        $resourceIds = DB::table('user_resource_roles')
             ->where('user_id', $this->id)
             ->where('role_id', $approverRole->id)
-            ->pluck('item_id');
+            ->pluck('resource_id');
 
-        return $query->whereIn('item_id', $itemIds)->get();
+        return $query->whereIn('resource_id', $resourceIds)->get();
     }
 
     protected static function boot()

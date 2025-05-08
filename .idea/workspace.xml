@@ -5,34 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="11d0cc4f-98de-4712-a9db-5adc54908c08" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/database/migrations/2025_05_07_000015_create_users_roles_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2025_05_07_000016_create_permissions_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2025_05_07_000017_create_role_permissions_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/BookingsTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/CompaniesTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/ItemsTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/PermissionsTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/RolePermissionsTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/RolesTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/UserItemRolesTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/UsersRolesTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/UsersTableSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/RoleController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ItemController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ResourceRoleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ResourceRoleController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Booking.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Company.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Item.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Resource.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Role.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Role.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/BookingSeeder.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/CompanySeeder.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Policies/ItemPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/ItemPolicy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2025_05_06_000003_create_items_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2025_05_06_000003_create_resources_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2025_05_06_000004_create_bookings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2025_05_06_000004_create_bookings_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2025_05_06_000006_create_user_item_roles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2025_05_06_000006_create_user_item_roles_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/BookingsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/BookingsTableSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/ItemSeeder.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/RoleSeeder.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/UserSeeder.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/ItemsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/ResourceTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/PermissionsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/PermissionsTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/RolePermissionsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/RolePermissionsTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/UserItemRolesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/UserResourceRolesTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/lang/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/tr.json" beforeDir="false" afterPath="$PROJECT_DIR$/lang/tr.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/tr/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/lang/tr/validation.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/bookings/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/bookings/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/items/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/items/create.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/nav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navigation_new.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navigation_new.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navigation.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navigation.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -221,7 +226,7 @@
       <workItem from="1746525951105" duration="3354000" />
       <workItem from="1746538538540" duration="1554000" />
       <workItem from="1746540144480" duration="1337000" />
-      <workItem from="1746541501287" duration="16290000" />
+      <workItem from="1746541501287" duration="25381000" />
     </task>
     <servers />
   </component>

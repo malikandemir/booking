@@ -105,7 +105,7 @@
             </div>
             <div class="col-md-4">
                 <div class="stats-box">
-                    <div class="stats-number">{{ \App\Models\Item::count() }}</div>
+                    <div class="stats-number">{{ \App\Models\Resource::count() }}</div>
                     <div class="text-muted">{{ __('Resources') }}</div>
                 </div>
             </div>

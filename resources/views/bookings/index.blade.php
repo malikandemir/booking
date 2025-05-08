@@ -10,7 +10,7 @@
         <div class="col-12">
             <div class="card shadow-sm">
                 <div class="card-header bg-white py-3">
-                    <div class="row align-items-center">
+                    <div class="row align-resources-center">
                         <div class="col-12 col-md-6 mb-2 mb-md-0">
                             <h4 class="mb-0 text-primary">{{ __('Bookings') }}</h4>
                         </div>
@@ -21,9 +21,9 @@
                                         <i class="fas fa-building me-1"></i>{{ __('Companies') }}
                                     </a>
                                 @endif
-                                @if(auth()->user()->hasPermission('manage_items'))
-                                    <a href="{{ route('items.index') }}" class="btn btn-outline-primary btn-sm">
-                                        <i class="fas fa-box me-1"></i>{{ __('Items') }}
+                                @if(auth()->user()->hasPermission('manage_resources'))
+                                    <a href="{{ route('resources.index') }}" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-box me-1"></i>{{ __('Resources') }}
                                     </a>
                                 @endif
                                 @if(auth()->user()->hasPermission('manage_all_users'))
@@ -50,7 +50,7 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th>{{ __('User') }}</th>
-                                        <th>{{ __('Item') }}</th>
+                                        <th>{{ __('Resource') }}</th>
                                         <th class="d-none d-md-table-cell">{{ __('Start Time') }}</th>
                                         <th class="d-none d-md-table-cell">{{ __('End Time') }}</th>
                                         <th class="d-none d-md-table-cell">{{ __('Description') }}</th>
@@ -62,7 +62,7 @@
                                     @foreach($bookings as $booking)
                                         <tr>
                                             <td>{{ $booking->user->name }}</td>
-                                            <td>{{ $booking->item->name }}</td>
+                                            <td>{{ $booking->resource->name }}</td>
                                             <td class="d-none d-md-table-cell">{{ $booking->start_time->format('Y-m-d H:i') }}</td>
                                             <td class="d-none d-md-table-cell">{{ $booking->end_time->format('Y-m-d H:i') }}</td>
                                             <td class="d-none d-md-table-cell">{{ $booking->description }}</td>
@@ -78,13 +78,13 @@
                                                     </button>
                                                     <ul class="dropdown-menu dropdown-menu-end">
                                                         <li>
-                                                            <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $booking->id }}">
+                                                            <button type="button" class="dropdown-resource" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $booking->id }}">
                                                                 <i class="fas fa-eye me-1"></i>{{ __('View Details') }}
                                                             </button>
                                                         </li>
                                                         @if($booking->can_edit)
                                                             <li>
-                                                                <a href="{{ route('bookings.edit', $booking) }}" class="dropdown-item">
+                                                                <a href="{{ route('bookings.edit', $booking) }}" class="dropdown-resource">
                                                                     <i class="fas fa-edit me-1"></i>{{ __('Edit') }}
                                                                 </a>
                                                             </li>
@@ -94,7 +94,7 @@
                                                                 <form action="{{ route('bookings.cancel', $booking) }}" method="POST" class="d-inline">
                                                                     @csrf
                                                                     @method('PATCH')
-                                                                    <button type="submit" class="dropdown-item text-danger" onclick="return confirm('{{ __('Are you sure you want to cancel this booking?') }}')">
+                                                                    <button type="submit" class="dropdown-resource text-danger" onclick="return confirm('{{ __('Are you sure you want to cancel this booking?') }}')">
                                                                         <i class="fas fa-times-circle me-1"></i>{{ __('Cancel') }}
                                                                     </button>
                                                                 </form>
@@ -105,7 +105,7 @@
                                                                     <form action="{{ route('bookings.approve', $booking) }}" method="POST" class="d-inline">
                                                                         @csrf
                                                                         <input type="hidden" name="_method" value="PUT">
-                                                                        <button type="submit" class="dropdown-item text-success">
+                                                                        <button type="submit" class="dropdown-resource text-success">
                                                                             <i class="fas fa-check me-1"></i>{{ __('Approve') }}
                                                                         </button>
                                                                     </form>
@@ -114,7 +114,7 @@
                                                                     <form action="{{ route('bookings.reject', $booking) }}" method="POST" class="d-inline">
                                                                         @csrf
                                                                         <input type="hidden" name="_method" value="PUT">
-                                                                        <button type="submit" class="dropdown-item text-danger" onclick="return confirm('{{ __('Are you sure you want to reject this booking?') }}')">
+                                                                        <button type="submit" class="dropdown-resource text-danger" onclick="return confirm('{{ __('Are you sure you want to reject this booking?') }}')">
                                                                             <i class="fas fa-times me-1"></i>{{ __('Reject') }}
                                                                         </button>
                                                                     </form>
@@ -138,8 +138,8 @@
                                                             <dt class="col-4">{{ __('User') }}</dt>
                                                             <dd class="col-8">{{ $booking->user->name }}</dd>
                                                             
-                                                            <dt class="col-4">{{ __('Item') }}</dt>
-                                                            <dd class="col-8">{{ $booking->item->name }}</dd>
+                                                            <dt class="col-4">{{ __('Resource') }}</dt>
+                                                            <dd class="col-8">{{ $booking->resource->name }}</dd>
                                                             
                                                             <dt class="col-4">{{ __('Start Time') }}</dt>
                                                             <dd class="col-8">{{ $booking->start_time->format('Y-m-d H:i') }}</dd>

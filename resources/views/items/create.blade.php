@@ -6,10 +6,10 @@
         <div class="col-md-8">
             <div class="card shadow-sm">
                 <div class="card-header bg-white py-3">
-                    <h4 class="mb-0 text-primary">{{ __('Create New Item') }}</h4>
+                    <h4 class="mb-0 text-primary">{{ __('Create New Resource') }}</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('items.store') }}" method="POST">
+                    <form action="{{ route('resources.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="company_id" value="{{ auth()->user()->company_id }}">
 
@@ -85,7 +85,7 @@
 
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">
-                                {{ __('Create Item') }}
+                                {{ __('Create Resource') }}
                             </button>
                         </div>
                     </form>

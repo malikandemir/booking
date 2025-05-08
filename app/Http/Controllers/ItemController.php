@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
+use App\Models\Resource;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
-class ItemController extends Controller
+class ResourceController extends Controller
 {
     public function __construct()
     {
@@ -14,21 +14,21 @@ class ItemController extends Controller
 
     public function index()
     {
-        $items = Item::paginate(10);
+        $resources = Resource::paginate(10);
 
-        return view('items.index', compact('items'));
+        return view('resources.index', compact('resources'));
     }
 
     public function create()
     {
         $companies = Company::all();
-        return view('items.create', compact('companies'));
+        return view('resources.create', compact('companies'));
     }
 
     public function store(Request $request)
     {
         try {
-            \Log::info('Item creation started', ['request_data' => $request->all()]);
+            \Log::info('Resource creation started', ['request_data' => $request->all()]);
             
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
@@ -44,27 +44,27 @@ class ItemController extends Controller
             // Convert status checkbox value
             $validated['status'] = isset($validated['status']) && $validated['status'] == '1';
 
-            $item = Item::create($validated);
-            \Log::info('Item created successfully', ['item' => $item]);
+            $resource = Resource::create($validated);
+            \Log::info('Resource created successfully', ['resource' => $resource]);
 
-            return redirect()->route('items.index')
-                ->with('success', __('Item created successfully'));
+            return redirect()->route('resources.index')
+                ->with('success', __('Resource created successfully'));
         } catch (\Exception $e) {
-            \Log::error('Error creating item', [
+            \Log::error('Error creating resource', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ]);
-            return back()->withInput()->withErrors(['error' => 'Failed to create item: ' . $e->getMessage()]);
+            return back()->withInput()->withErrors(['error' => 'Failed to create resource: ' . $e->getMessage()]);
         }
     }
 
-    public function edit(Item $item)
+    public function edit(Resource $resource)
     {
         $companies = Company::all();
-        return view('items.edit', compact('item', 'companies'));
+        return view('resources.edit', compact('resource', 'companies'));
     }
 
-    public function update(Request $request, Item $item)
+    public function update(Request $request, Resource $resource)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -78,17 +78,17 @@ class ItemController extends Controller
             $validated['company_id'] = auth()->user()->company_id;
         }
 
-        $item->update($validated);
+        $resource->update($validated);
 
-        return redirect()->route('items.index')
-            ->with('success', __('Item updated successfully'));
+        return redirect()->route('resources.index')
+            ->with('success', __('Resource updated successfully'));
     }
 
-    public function destroy(Item $item)
+    public function destroy(Resource $resource)
     {
-        $item->delete();
+        $resource->delete();
 
-        return redirect()->route('items.index')
-            ->with('success', __('Item deleted successfully'));
+        return redirect()->route('resources.index')
+            ->with('success', __('Resource deleted successfully'));
     }
 }

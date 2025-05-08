@@ -12,7 +12,7 @@ class Booking extends Model
     protected $fillable = [
         'company_id',
         'user_id',
-        'item_id',
+        'resource_id',
         'start_time',
         'end_time',
         'description',
@@ -31,8 +31,8 @@ class Booking extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function item()
+    public function resource()
     {
-        return $this->belongsTo(Item::class);
+        return $this->belongsTo(Resource::class);
     }
 }

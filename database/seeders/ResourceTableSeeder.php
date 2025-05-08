@@ -5,11 +5,11 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ItemsTableSeeder extends Seeder
+class ResourceTableSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('items')->insert([
+        DB::table('resources')->insert([
             [
                 'company_id' => 1,
                 'name' => 'Projector',

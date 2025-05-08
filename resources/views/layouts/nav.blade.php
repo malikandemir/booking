@@ -44,11 +44,13 @@
     <div class="sidebar-content p-3">
         <ul class="nav flex-column">
             @auth
-                <li class="nav-item mb-2">
-                    <a class="nav-link {{ request()->routeIs('bookings.*') ? 'active' : '' }}" href="{{ route('bookings.index') }}">
-                        <i class="fas fa-calendar me-2"></i>{{ __('Bookings') }}
-                    </a>
-                </li>
+                @if(auth()->user()->hasPermission('manage_bookings'))
+                    <li class="nav-item mb-2">
+                        <a class="nav-link {{ request()->routeIs('bookings.*') ? 'active' : '' }}" href="{{ route('bookings.index') }}">
+                            <i class="fas fa-calendar me-2"></i>{{ __('Bookings') }}
+                        </a>
+                    </li>
+                @endif
 
                 @if(auth()->user()->hasPermission('manage_companies'))
                     <li class="nav-item mb-2">
@@ -58,7 +60,7 @@
                     </li>
                 @endif
 
-                @if(auth()->user()->hasPermission('manage_items'))
+                @if(auth()->user()->hasPermission('manage_resources'))
                     <li class="nav-item mb-2">
                         <a class="nav-link {{ request()->routeIs('items.*') ? 'active' : '' }}" href="{{ route('items.index') }}">
                             <i class="fas fa-car me-2"></i>{{ __('Items') }}
@@ -69,6 +71,18 @@
                     <li class="nav-item mb-2">
                         <a class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}" href="{{ route('users.index') }}">
                             <i class="fas fa-users me-2"></i>{{ __('Users') }}
+                        </a>
+                    </li>
+                @endif
+                @if(auth()->user()->hasPermission('manage_roles'))
+                    <li class="nav-item mb-2">
+                        <a class="nav-link {{ request()->routeIs('roles.*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
+                            <i class="fas fa-user-shield me-2"></i>{{ __('Roles') }}
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link {{ request()->routeIs('permissions.*') ? 'active' : '' }}" href="{{ route('permissions.index') }}">
+                            <i class="fas fa-key me-2"></i>{{ __('Permissions') }}
                         </a>
                     </li>
                 @endif

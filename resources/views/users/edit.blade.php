@@ -40,7 +40,7 @@
                             @enderror
                         </div>
 
-                        @if(auth()->user()->isSuperAdmin())
+                        @if(auth()->user()->hasPermission('manage_companies'))
                             <div class="mb-3">
                                 <label for="company_id" class="form-label">{{ __('Company') }}</label>
                                 <select class="form-select @error('company_id') is-invalid @enderror" 
@@ -58,10 +58,20 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="is_admin" name="is_admin" value="1"
-                                    {{ old('is_admin', $user->isAdmin()) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="is_admin">{{ __('Is Admin') }}</label>
+                            <div class="mb-3">
+                                <label for="roles" class="form-label">{{ __('Roles') }}</label>
+                                <select class="form-select @error('roles') is-invalid @enderror" id="roles" name="roles[]" multiple required>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}"
+                                            {{ (collect(old('roles', $user->roles->pluck('id')->toArray()))->contains($role->id)) ? 'selected' : '' }}>
+                                            {{ $role->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <div class="form-text">{{ __('Hold Ctrl (Windows) or Command (Mac) to select multiple roles.') }}</div>
+                                @error('roles')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         @endif
 

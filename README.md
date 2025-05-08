@@ -71,8 +71,8 @@ MIT License
 - companies
 - users
 - roles
-- user_item_roles (keep the item roles approver or booker )
-- items
+- user_resources_roles (keep the resource roles approver or booker )
+- resources
 - bookings
 
 ## some roles

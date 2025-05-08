@@ -15,9 +15,9 @@ class Company extends Model
         'status'
     ];
 
-    public function items()
+    public function resources()
     {
-        return $this->hasMany(Item::class);
+        return $this->hasMany(Resource::class);
     }
 
     public function users()

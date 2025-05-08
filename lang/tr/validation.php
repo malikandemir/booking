@@ -175,7 +175,7 @@ return [
             'after' => 'Bitiş zamanı başlangıç zamanından sonra olmalıdır.',
             'before' => 'Bitiş zamanı mesai saatleri içinde olmalıdır (09:00-17:00).',
         ],
-        'item_id' => [
+        'resource_id' => [
             'required' => 'Lütfen bir öğe seçin.',
             'exists' => 'Seçilen öğe geçersiz.',
         ],
@@ -192,7 +192,7 @@ return [
         'password' => 'Şifre',
         'start_time' => 'Başlangıç zamanı',
         'end_time' => 'Bitiş zamanı',
-        'item_id' => 'Öğe',
+        'resource_id' => 'Öğe',
         'purpose' => 'Amaç',
         'company_id' => 'Şirket',
         'is_admin' => 'Yönetici',

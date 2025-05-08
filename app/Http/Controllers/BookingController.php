@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
-use App\Models\Item;
+use App\Models\Resource;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,16 +15,16 @@ class BookingController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $query = Booking::with(['user', 'item']);
+        $query = Booking::with(['user', 'resource']);
 
-        $itemsWithApprovalAccess = DB::table('user_item_roles')
+        $resourcesWithApprovalAccess = DB::table('user_resource_roles')
             ->where('user_id', $user->id)
-            ->pluck('item_id');
+            ->pluck('resource_id');
 
-        $query->where(function($q) use ($user, $itemsWithApprovalAccess) {
-            $q->whereIn('item_id', $itemsWithApprovalAccess) // Bookings for items user can approve
+        $query->where(function($q) use ($user, $resourcesWithApprovalAccess) {
+            $q->whereIn('resource_id', $resourcesWithApprovalAccess) // Bookings for resources user can approve
               ->orWhere('user_id', $user->id); // User's own bookings
-        })->whereHas('item', function($q) use ($user) {
+        })->whereHas('resource', function($q) use ($user) {
             $q->where('company_id', $user->company_id);
         });
 
@@ -32,7 +32,7 @@ class BookingController extends Controller
         
         $events = $bookings->map(function($booking) {
             return [
-                'title' => $booking->user->name . ' - ' . $booking->item->name . ' - ' . $booking->purpose,
+                'title' => $booking->user->name . ' - ' . $booking->resource->name . ' - ' . $booking->purpose,
                 'start' => $booking->start_time->format('Y-m-d H:i:s'),
                 'end' => $booking->end_time->format('Y-m-d H:i:s'),
                 'color' => $booking->status === 'approved' ? '#198754' : 
@@ -40,34 +40,34 @@ class BookingController extends Controller
             ];
         });
 
-        $items = Item::where('company_id', $user->company_id)
+        $resources = Resource::where('company_id', $user->company_id)
             ->where('status', true)
-            ->whereIn('id', $itemsWithApprovalAccess)
+            ->whereIn('id', $resourcesWithApprovalAccess)
             ->get();
 
-        return view('bookings.index', compact('bookings', 'events', 'items'));
+        return view('bookings.index', compact('bookings', 'events', 'resources'));
     }
 
     public function create()
     {
-        $items = Item::query()
+        $resources = Resource::query()
             ->where('company_id', auth()->user()->company_id)
             ->where('status', true)
             ->get();
 
-        return view('bookings.create', compact('items'));
+        return view('bookings.create', compact('resources'));
     }
 
-    public function getItemBookings($itemId)
+    public function getResourceBookings($resourceId)
     {
-        $item = Item::findOrFail($itemId);
+        $resource = Resource::findOrFail($resourceId);
         
-        // Check if user has access to this item
-        if (Auth::user()->isAdmin() && $item->company_id !== Auth::user()->company_id) {
+        // Check if user has access to this resource
+        if (Auth::user()->isAdmin() && $resource->company_id !== Auth::user()->company_id) {
             abort(403);
         }
 
-        $bookings = Booking::where('item_id', $itemId)
+        $bookings = Booking::where('resource_id', $resourceId)
             ->where('start_time', '>=', now()->startOfDay())
             ->orderBy('start_time')
             ->with('user')
@@ -88,16 +88,16 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'item_id' => 'required|exists:items,id',
+            'resource_id' => 'required|exists:resources,id',
             'start_time' => 'required|date',
             'end_time' => 'required|date|after:start_time',
             'description' => 'nullable|string|max:255',
         ]);
 
-        $item = Item::findOrFail($validated['item_id']);
+        $resource = Resource::findOrFail($validated['resource_id']);
 
         // Check for overlapping bookings
-        $hasOverlap = Booking::where('item_id', $validated['item_id'])
+        $hasOverlap = Booking::where('resource_id', $validated['resource_id'])
             ->where('status', '!=', 'rejected')
             ->where(function ($query) use ($validated) {
                 $query->whereBetween('start_time', [$validated['start_time'], $validated['end_time']])
@@ -118,7 +118,7 @@ class BookingController extends Controller
         $booking = Booking::create([
             'company_id' => auth()->user()->company_id,
             'user_id' => auth()->id(),
-            'item_id' => $validated['item_id'],
+            'resource_id' => $validated['resource_id'],
             'start_time' => $validated['start_time'],
             'end_time' => $validated['end_time'],
             'description' => $validated['description'],

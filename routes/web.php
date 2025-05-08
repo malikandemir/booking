@@ -35,6 +35,8 @@ Route::middleware(['web'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::resource('roles', \App\Http\Controllers\RoleController::class)->except(['show']);
+    Route::resource('permissions', \App\Http\Controllers\PermissionController::class)->except(['show']);
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Bookings

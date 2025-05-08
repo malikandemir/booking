@@ -15,9 +15,9 @@ class Role extends Model
             ->withTimestamps();
     }
 
-    public function items(): BelongsToMany
+    public function resources(): BelongsToMany
     {
-        return $this->belongsToMany(Item::class, 'user_item_roles')
+        return $this->belongsToMany(Resource::class, 'user_resource_roles')
             ->withTimestamps();
     }
 

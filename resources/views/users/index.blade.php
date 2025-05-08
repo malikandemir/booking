@@ -19,8 +19,10 @@
                 <tr>
                     <th>{{ __('Name') }}</th>
                     <th>{{ __('Email') }}</th>
-                    <th>{{ __('Role') }}</th>
+                    <th>{{ __('Roles') }}</th>
+                    <th>{{ __('Company') }}</th>
                     <th>{{ __('Created At') }}</th>
+                    <th>{{ __('Actions') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,8 +30,12 @@
                     <tr>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->is_admin ? __('Admin') : __('User') }}</td>
+                        <td>{{ $user->roles->pluck('name')->join(', ') }}</td>
+                        <td>{{ $user->company ? $user->company->name : 'N/A' }}</td>
                         <td>{{ $user->created_at ? $user->created_at->format('d.m.Y H:i') : 'N/A' }}</td>
+                        <td>
+                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-warning">{{ __('Edit') }}</a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

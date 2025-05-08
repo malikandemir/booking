@@ -2,24 +2,24 @@
 
 namespace App\Policies;
 
-use App\Models\Item;
+use App\Models\Resource;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ItemPolicy
+class ResourcePolicy
 {
     use HandlesAuthorization;
 
-    public function manage(User $user, Item $item): bool
+    public function manage(User $user, Resource $resource): bool
     {
-        // Super admin can manage all items
+        // Super admin can manage all resources
         if ($user->isSuperAdmin()) {
             return true;
         }
 
-        // Admin can only manage items in their company
+        // Admin can only manage resources in their company
         if ($user->isAdmin()) {
-            return $item->company_id === $user->company_id;
+            return $resource->company_id === $user->company_id;
         }
 
         return false;
@@ -30,13 +30,13 @@ class ItemPolicy
         return $user->isAdmin() || $user->isSuperAdmin();
     }
 
-    public function view(User $user, Item $item): bool
+    public function view(User $user, Resource $resource): bool
     {
         if ($user->isSuperAdmin()) {
             return true;
         }
 
-        return $item->company_id === $user->company_id;
+        return $resource->company_id === $user->company_id;
     }
 
     public function create(User $user): bool
@@ -44,27 +44,27 @@ class ItemPolicy
         return $user->isAdmin() || $user->isSuperAdmin();
     }
 
-    public function update(User $user, Item $item): bool
+    public function update(User $user, Resource $resource): bool
     {
         if ($user->isSuperAdmin()) {
             return true;
         }
 
         if ($user->isAdmin()) {
-            return $item->company_id === $user->company_id;
+            return $resource->company_id === $user->company_id;
         }
 
         return false;
     }
 
-    public function delete(User $user, Item $item): bool
+    public function delete(User $user, Resource $resource): bool
     {
         if ($user->isSuperAdmin()) {
             return true;
         }
 
         if ($user->isAdmin()) {
-            return $item->company_id === $user->company_id;
+            return $resource->company_id === $user->company_id;
         }
 
         return false;

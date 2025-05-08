@@ -51,6 +51,11 @@
                             <i class="fas fa-building me-2"></i>{{ __('Companies') }}
                         </a>
                     </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link {{ request()->routeIs('roles.*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
+                            <i class="fas fa-user-shield me-2"></i>{{ __('Roles') }}
+                        </a>
+                    </li>
                 @endif
 
                 @if(auth()->user()->isAdmin())

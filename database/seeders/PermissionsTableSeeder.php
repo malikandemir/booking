@@ -32,8 +32,8 @@ class PermissionsTableSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'name' => 'Manage Items',
-                'slug' => 'manage_items',
+                'name' => 'Manage Resources',
+                'slug' => 'manage_resources',
                 'guard_name' => 'web',
                 'created_at' => now(),
                 'updated_at' => now()
@@ -48,6 +48,20 @@ class PermissionsTableSeeder extends Seeder
             [
                 'name' => 'Book',
                 'slug' => 'book',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Manage Roles',
+                'slug' => 'manage_roles',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Manage Bookings',
+                'slug' => 'manage_bookings',
                 'guard_name' => 'web',
                 'created_at' => now(),
                 'updated_at' => now()
