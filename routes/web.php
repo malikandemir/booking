@@ -3,7 +3,7 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ResourceRoleController;
 use App\Http\Controllers\UserController;
@@ -43,11 +43,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('bookings', BookingController::class);
     Route::put('/bookings/{booking}/approve', [BookingController::class, 'approve'])->name('bookings.approve');
     Route::put('/bookings/{booking}/reject', [BookingController::class, 'reject'])->name('bookings.reject');
-    Route::get('/bookings/item/{item}/bookings', [BookingController::class, 'getItemBookings'])->name('bookings.item.bookings');
+    Route::get('/bookings/resource/{resource}/bookings', [BookingController::class, 'getResourceBookings'])->name('bookings.resource.bookings');
 
-    Route::resource('items', ItemController::class);
-    Route::get('/items/{item}/roles', [ResourceRoleController::class, 'index'])->name('items.roles');
-    Route::put('/items/{item}/roles', [ResourceRoleController::class, 'update'])->name('items.roles.update');
+    Route::resource('resources', ResourceController::class);
+    Route::get('/resources/{resource}/roles', [ResourceRoleController::class, 'index'])->name('resources.roles');
+    Route::put('/resources/{resource}/roles', [ResourceRoleController::class, 'update'])->name('resources.roles.update');
 
     Route::resource('companies', CompanyController::class);
 

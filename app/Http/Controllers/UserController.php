@@ -19,8 +19,12 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::get();
-
+        $user = Auth::user();
+        if ($user->hasPermission('manage_all_users')) {
+            $users = User::all();
+        } else {
+            $users = User::where('company_id', $user->company_id)->get();
+        }
         return view('users.index', compact('users'));
     }
 

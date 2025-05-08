@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card shadow-sm">
                 <div class="card-header bg-white py-3">
-                    <h4 class="mb-0 text-primary">{{ __('Edit Item') }}</h4>
+                    <h4 class="mb-0 text-primary">{{ __('Edit Resource') }}</h4>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('items.update', $item) }}" method="POST">
@@ -80,7 +80,7 @@
 
                         <div class="d-flex justify-content-end gap-2">
                             <a href="{{ route('items.index') }}" class="btn btn-light">{{ __('Cancel') }}</a>
-                            <button type="submit" class="btn btn-primary">{{ __('Update Item') }}</button>
+                            <button type="submit" class="btn btn-primary">{{ __('Update Resource') }}</button>
                         </div>
                     </form>
                 </div>

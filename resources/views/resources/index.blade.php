@@ -8,8 +8,8 @@
                 <div class="card-header bg-white py-3">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="mb-0 text-primary">{{ __('Resource List') }}</h4>
-                        <a href="{{ route('items.create') }}" class="btn btn-primary">
-                            <i class="fas fa-plus-circle me-1"></i>{{ __('Create New Item') }}
+                        <a href="{{ route('resources.create') }}" class="btn btn-primary">
+                            <i class="fas fa-plus-circle me-1"></i>{{ __('Create New Resource') }}
                         </a>
                     </div>
                 </div>
@@ -26,38 +26,38 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($items as $item)
+                                @forelse($resources as $resource)
                                     <tr>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                @if($item->icon)
-                                                    <i class="{{ $item->icon }} fa-lg text-primary me-2"></i>
+                                                @if($resource->icon)
+                                                    <i class="{{ $resource->icon }} fa-lg text-primary me-2"></i>
                                                 @else
                                                     <i class="fas fa-cube fa-lg text-primary me-2"></i>
                                                 @endif
-                                                <span>{{ $item->name }}</span>
+                                                <span>{{ $resource->name }}</span>
                                             </div>
                                         </td>
-                                        <td>{{ $item->type }}</td>
+                                        <td>{{ $resource->type }}</td>
                                         <td>
                                             <span class="text-truncate d-inline-block" style="max-width: 300px;">
-                                                {{ $item->description }}
+                                                {{ $resource->description }}
                                             </span>
                                         </td>
                                         <td>
-                                            <span class="badge rounded-pill bg-{{ $item->status === 'active' ? 'success' : 'danger' }}">
-                                                {{ __($item->status === 'active' ? 'Active' : 'Inactive') }}
+                                            <span class="badge rounded-pill bg-{{ $resource->status === 'active' ? 'success' : 'danger' }}">
+                                                {{ __($resource->status === 'active' ? 'Active' : 'Inactive') }}
                                             </span>
                                         </td>
                                         <td>
                                             <div class="d-flex gap-2">
-                                                <a href="{{ route('items.edit', $item) }}" class="btn btn-sm btn-primary me-2">
+                                                <a href="{{ route('resources.edit', $resource) }}" class="btn btn-sm btn-primary me-2">
                                                     <i class="fas fa-edit me-1"></i>{{ __('Edit') }}
                                                 </a>
-                                                <a href="{{ route('items.roles', $item) }}" class="btn btn-sm btn-info me-2">
+                                                <a href="{{ route('resources.roles', $resource) }}" class="btn btn-sm btn-info me-2">
                                                     <i class="fas fa-user-tag me-1"></i>{{ __('Manage Roles') }}
                                                 </a>
-                                                <form action="{{ route('items.destroy', $item) }}" method="POST" class="d-inline">
+                                                <form action="{{ route('resources.destroy', $resource) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('{{ __('Are you sure?') }}')">
@@ -81,9 +81,9 @@
                         </table>
                     </div>
 
-                    @if($items instanceof \Illuminate\Pagination\LengthAwarePaginator && $items->hasPages())
+                    @if($resources instanceof \Illuminate\Pagination\LengthAwarePaginator && $resources->hasPages())
                         <div class="d-flex justify-content-center mt-4">
-                            {{ $items->links() }}
+                            {{ $resources->links() }}
                         </div>
                     @endif
                 </div>

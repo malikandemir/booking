@@ -60,8 +60,8 @@
 
                 @if(auth()->user()->isAdmin())
                     <li class="nav-item mb-2">
-                        <a class="nav-link {{ request()->routeIs('items.*') ? 'active' : '' }}" href="{{ route('items.index') }}">
-                            <i class="fas fa-car me-2"></i>{{ __('Items') }}
+                        <a class="nav-link {{ request()->routeIs('resources.*') ? 'active' : '' }}" href="{{ route('resources.index') }}">
+                            <i class="fas fa-car me-2"></i>{{ __('Resources') }}
                         </a>
                     </li>
                     <li class="nav-item mb-2">

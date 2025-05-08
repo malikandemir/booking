@@ -57,7 +57,6 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-
                             <div class="mb-3">
                                 <label for="roles" class="form-label">{{ __('Roles') }}</label>
                                 <select class="form-select @error('roles') is-invalid @enderror" id="roles" name="roles[]" multiple required>

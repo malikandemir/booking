@@ -25,7 +25,7 @@
                                 <tbody>
                                     @foreach($pendingBookings as $booking)
                                         <tr>
-                                            <td>{{ $booking->item->name }}</td>
+                                            <td>{{ $booking->resource->name }}</td>
                                             <td>{{ $booking->user->name }}</td>
                                             <td>{{ $booking->start_time->format('Y-m-d H:i') }}</td>
                                             <td>{{ $booking->end_time->format('Y-m-d H:i') }}</td>
@@ -70,7 +70,7 @@
                                 <tbody>
                                     @foreach($userBookings as $booking)
                                         <tr>
-                                            <td>{{ $booking->item->name }}</td>
+                                            <td>{{ $booking->resource->name }}</td>
                                             <td>{{ $booking->start_time->format('Y-m-d H:i') }}</td>
                                             <td>{{ $booking->end_time->format('Y-m-d H:i') }}</td>
                                             <td>
